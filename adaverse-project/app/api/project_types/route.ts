@@ -4,6 +4,14 @@ import { db } from "@/db/drizzle";
 import { projectsTypes } from "@/db/schema";
 
 export async function GET() {
-  const data = await db.select().from(projectsTypes);
-  return Response.json(data);
+  try {
+    const data = await db.select().from(projectsTypes);
+    return Response.json(data);
+  } catch (error) {
+    console.error("GET /api/project_types error:", error);
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error", details: String(error) }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
 }
