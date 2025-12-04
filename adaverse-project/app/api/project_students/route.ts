@@ -3,7 +3,7 @@ import { studentProjects, promotions, projectsTypes } from "@/db/schema";
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 
-// Fonction pour générer un slug
+
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -13,7 +13,6 @@ function generateSlug(title: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-// GET - Récupérer tous les projets
 export async function GET(request: Request) {
   try {
     const data = await db
@@ -44,7 +43,6 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Créer un nouveau projet
 export async function POST(request: Request) {
   try {
     const body = await request.json();
